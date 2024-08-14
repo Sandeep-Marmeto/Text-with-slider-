@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Watch Carousel</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@splidejs/splide@3.6.12/dist/css/splide.min.css">
+    <style>
+        /* Additional custom styles */
+        #carousel {
+            transition: background-color 0.5s ease;
+        }
+
+        .splide__slide {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .splide__arrow {
+            background: none;
+            color: white;
+            border: 2px solid white;
+            border-radius: 50%;
+            padding: 10px;
+            width: 45px;
+            height: 45px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .splide__arrow svg {
+            fill: white;
+            width: 24px;
+            height: 24px;
+        }
+
+        /* Gradient background */
+        body {
+            transition: background 0.5s ease;
+        }
+
+        /* Sidebar styles */
+        #sidebar {
+            transform: translateX(-100%);
+            transition: transform 0.3s ease;
+        }
+
+        #sidebar.active {
+            transform: translateX(0);
+        }
+    </style>
+</head>
+
+<body class="bg-gray-50">
+
+    <!-- Header -->
+    <header id="header" class="flex justify-between items-center p-6 lg:px-28 px-6 bg-white shadow-md">
+        <div class="text-2xl font-bold">KING</div>
+        <nav class="hidden lg:flex space-x-4 lg:space-x-8 gap-4 lg:gap-10 font-semibold">
+            <a href="#" class="text-sm lg:text-lg">Shop</a>
+            <a href="#" class="text-sm lg:text-lg">Brands</a>
+            <a href="#" class="text-sm lg:text-lg">Contact us</a>
+            <button class="bg-black text-white px-4 py-2 rounded-lg text-sm lg:text-base">Sign up</button>
+        </nav>
+        <div class="lg:hidden flex items-center">
+            <button id="hamburger" class="focus:outline-none">
+                <svg class="w-8 h-8 text-black" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                    stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M4 6h16M4 12h16m-7 6h7" />
+                </svg>
+            </button>
+        </div>
+    </header>
+
+    <!-- Sidebar -->
+    <aside id="sidebar" class="fixed top-0 left-0 w-64 h-full bg-white shadow-lg z-50 lg:hidden flex flex-col space-y-6 p-6">
+        <button id="close-sidebar" class="self-end mb-6">
+            <svg class="w-8 h-8 text-black" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+            </svg>
+        </button>
+        <a href="#" class="text-lg font-semibold">Shop</a>
+        <a href="#" class="text-lg font-semibold">Brands</a>
+        <a href="#" class="text-lg font-semibold">Contact us</a>
+        <button class="bg-black text-white px-4 py-2 rounded-lg text-lg">Sign up</button>
+    </aside>
+
+    <!-- Carousel Section -->
+    <section id="carousel" class="flex flex-col lg:flex-row items-center justify-between p-6 lg:p-10 space-y-6 lg:space-y-0">
+        <div class="flex flex-col space-y-4 text-center lg:text-left">
+            <h1 class="text-2xl lg:text-4xl font-bold text-white" id="carousel-title">Exquisite Watches</h1>
+            <h2 class="text-xl lg:text-2xl font-semibold text-white" id="carousel-subtext">Gold Luxury, Choose Us</h2>
+            <p class="text-sm lg:text-lg lg:w-1/2 mx-auto lg:mx-0" id="carousel-description">Discover the Perfect Watch
+                for Every Occasion and Elevate Your Style with Timeless Elegance and Precision Craftsmanship.</p>
+            <span class="text-xl lg:text-3xl font-bold text-white" id="carousel-price">$499.00</span>
+
+            <!-- Social Media Icons -->
+            <div class="social-icons hidden md:flex md:justify-center lg:justify-start space-x-4 mt-4">
+                <a href="#" class="social-icon flex items-center justify-center w-8 h-8 rounded-full border border-gray-300 p-2">
+                    <img src="./Vector.png" alt="Facebook Icon" class="w-full h-full object-contain">
+                </a>
+                <a href="#" class="social-icon flex items-center justify-center w-8 h-8 rounded-full border border-gray-300 p-2">
+                    <img src="./twitter.png" alt="Twitter Icon" class="w-full h-full object-contain">
+                </a>
+                <a href="#" class="social-icon flex items-center justify-center w-8 h-8 rounded-full border border-gray-300 p-2">
+                    <img src="./youtube.png" alt="YouTube Icon" class="w-full h-full object-contain">
+                </a>
+            </div>
+        </div>
+        <div class="splide w-full lg:w-1/2" id="splide-carousel">
+            <div class="splide__track">
+                <ul class="splide__list">
+                    <!-- Images will be dynamically injected here -->
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <script src="https://cdn.jsdelivr.net/npm/@splidejs/splide@3.6.12/dist/js/splide.min.js"></script>
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+    <script src="script.js"></script>
+
+    <!-- JavaScript for sidebar toggle -->
+    <script>
+        document.getElementById('hamburger').addEventListener('click', function () {
+            document.getElementById('sidebar').classList.add('active');
+        });
+
+        document.getElementById('close-sidebar').addEventListener('click', function () {
+            document.getElementById('sidebar').classList.remove('active');
+        });
+    </script>
+</body>
+
+</html>
